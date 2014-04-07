@@ -1,0 +1,31 @@
+{
+    "name": "Dushyanta",
+    "children": 
+    [
+        {
+        "name": "Bharata - First Kuru King",
+        "children": 
+        [
+            {
+            "name": "Shantanu",
+            "children": [{
+                "name": "Bheesma from river nymph Ganga",
+                "size": 3938
+            }, 
+            {
+                "name": "Vichitravirya from wife Satyavati",
+                "size": 3812
+            }
+
+        ]
+        }, 
+        {
+            "name": "Somadatta",
+            "children": 
+            [{
+                "name": "Bhurishrava",
+                "size": 3534
+            }]
+        }
+    ]
+}
