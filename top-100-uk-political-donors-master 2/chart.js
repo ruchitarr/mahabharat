@@ -33,18 +33,18 @@ var svg = d3.select
     .attr("id", "circle")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-// Parties label
-svg.append("text").attr("class","entity party")
-    .text("Parties")
-    .attr("x", width / 2 - 50)
-    .attr("y", -outerRadius + 50) 
+// KAurav label
+svg.append("text").attr("class","entity kaurav")
+    .text("kaurav")
+   .attr("x", width / 2 - 50)
+    .attr("y", -outerRadius + 50)
     .attr("text-anchor","end");
 
-// Donors label
-svg.append("text").attr("class","entity donor")
-    .text("Donors")
+// Pandav label
+svg.append("text").attr("class","entity pandav")
+    .text("pandav")
     .attr("x", -width / 2 )
-    .attr("y", outerRadius)
+   .attr("y", outerRadius)
     .attr("text-anchor","start");
 
 // Use built in formatting method to add commas to long numbers
@@ -53,13 +53,13 @@ var comma = d3.format(",.0f");
 
 // No transformations in this chart so pass in the data files
 // and construct chart in one pass.
-d3.csv("main3top100donors.csv", function(donors) {
+d3.csv("main3top100donors.csv", function(pandav) {
   d3.json("main3top100donors.json", function(matrix) {
     
     // Generate data matrix array
     layout.matrix(matrix);
     
-    // Outer ring group for each party and donor
+    // Outer ring group for each kaurav and pandav
     var group = svg.selectAll(".group")
         .data(layout.groups)
       .enter().append("g")
@@ -75,24 +75,17 @@ d3.csv("main3top100donors.csv", function(donors) {
         .attr("d", arc)
         .attr("class", "arc")
        // .style("stroke", function(d, i) { return donors[i].color; })
-        .style("fill", function(d, i) { return donors[i].color; });
+        .style("fill", function(d, i) { return pandav[i].color; });
     
     // Position label text for each group on the outer ring
-    var label = group.append("text")
-      .each(function(d) { d.angle = (d.startAngle + d.endAngle) / 2; })
-        .attr("dy", ".35em")
-        .attr("id", function(d, i) { return donors[i].name; })
-      // Adding CSS classes for font styling
-      .attr("class", function(d, i) { return "label " + donors[i].entity; })
-      // If data arc position greater than pi add text-anchor to end else no text-anchor
-      .attr("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
-      // adjust position relative to the group arc element
-      .attr("transform", function(d) {
-        return "rotate(" + (10 * 180 / Math.PI - 90) + ")"
-            + "translate(" + (outerRadius - 20) + ")"
-            + (d.angle > Math.PI ? "rotate(180)" : "");
-        })
-      .text(function(d, i) { return donors[i].name; });
+    // Add a text label.
+var label = group.append("text")
+.attr("x", 6)
+.attr("dy", 15);
+ 
+label.append("textPath")
+.attr("xlink:href", function(d, i) { return "#group" + i; })
+.text(function(d, i) { return pandav[i].name; });
 
      // Add the chords linking the parties and donors
     var chord = svg.selectAll(".chord")
@@ -100,10 +93,10 @@ d3.csv("main3top100donors.csv", function(donors) {
       .enter().append("path")
         .attr("class", "chord")
         .attr("amount", function(d, i) { return (d.source.value); })
-        .attr("recip", function(d) { return donors[d.source.index].name; })
-        .attr("donor", function(d) { return donors[d.target.index].name; })
-        .style("stroke", function(d) { return donors[d.source.index].color; })
-          .style("fill", function(d) { return donors[d.source.index].color; })
+        .attr("recip", function(d) { return pandav[d.source.index].name; })
+        .attr("pandav", function(d) { return pandav[d.target.index].name; })
+        .style("stroke", function(d) { return pandav[d.source.index].color; })
+          .style("fill", function(d) { return pandav[d.source.index].color; })
         .attr("d", path);
       // Add a tooltip with further information when user hovers on one of the chords  
         chord
@@ -111,7 +104,7 @@ d3.csv("main3top100donors.csv", function(donors) {
           var T = d3.event.pageX;
           var e = d3.event.pageY;
           var r = d3.select(this).attr("amount");
-          var R = d3.select(this).attr("donor");
+          var R = d3.select(this).attr("pandav");
           var y = d3.select(this).attr("recip");
           var infoBox = "<p>Donor: <b>" + R + " </b></p><p> Recipient: <b>" + y + "</b></p> <p>Amount given since 2010 election: <h4>&#163;" + comma(r) + ".</h4></p>";
 
@@ -165,8 +158,8 @@ d3.csv("main3top100donors.csv", function(donors) {
           return d.source.index != i && d.target.index != i;
           })
         .transition(200)
-        .style("stroke", function(d) { return donors[d.source.index].color; })
-          .style("fill", function(d) { return donors[d.source.index].color; })
+        .style("stroke", function(d) { return pandav[d.source.index].color; })
+          .style("fill", function(d) { return pandav[d.source.index].color; })
         .style("opacity", opacity);
 
         grouptip.style("visibility", "hidden");
