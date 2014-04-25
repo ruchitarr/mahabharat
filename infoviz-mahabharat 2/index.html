@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Mahabharata - Clash of Clans</title>
+<style>
+	@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300);
+	@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,600,700);
+	
+	
+	body {
+		font-family: 'Raleway', 'Open Sans', sans-serif;
+		font-size: 62.5%;
+		font-weight: 400;
+	}
+
+	a {
+    text-decoration: none;
+    color: #0f394f;
+	}
+	a:hover,
+	a:focus {
+	    text-decoration: underline;
+	}
+	
+
+	#circle circle {
+fill: none;
+pointer-events: all;
+}
+ 
+.group path {
+fill-opacity: .5;
+}
+ 
+path.chord {
+stroke: #000;
+stroke-width: .25px;
+}
+ 
+#circle:hover path.fade {
+display: none;
+}
+
+	.group:hover .donor {
+		font-size: 1.3em;
+		font-weight: 700;
+	}
+				
+	.label {
+		cursor: pointer;
+		padding: 15px;
+		color: rgba(0,0,0,.8);
+		font-weight: 700;
+	}
+
+	.kaurav {
+		font-size: 1.5em;
+		font-weight: 700;
+	}
+
+	.pandav {
+		font-size: 1.1em;
+	}		
+
+	.chord {
+		fill-opacity: .9;
+		stroke-opacity: .25;
+	}
+
+	.chord:hover {
+		stroke-width: 5;
+		stroke-opacity: 1;
+		stroke: black;
+	}
+
+	text.entity.party {
+		font-size: 3em;
+		fill: rgba(170,170,170,1);
+		font-weight: 700;						
+	}
+
+	text.entity.donor {
+		font-size: 3em;
+		fill: rgba(170,170,170,1);
+		font-weight: 700;
+	}
+
+	text.notes {
+		font-size: 1em;
+		fill: rgba(0,0,0,1);
+		opacity: 1;
+	}
+
+	#chart {
+		margin: 0 50px;
+	}
+
+	.tooltip {
+	  background: rgba(0,0,0,.8);
+	  width: 250px;
+	  text-align: center;
+	  padding: 5px; 
+	  border-radius: 2px; 
+	  box-shadow: 0px 0px 2px 0px #aabbcc; 
+	  opacity: 1; 
+	  position: absolute;
+	  font-weight: 400;
+	  color: #fff;
+	  font-size: 1.4em
+	}
+
+	.hidden {
+		visibility: hidden;
+	}
+
+	.tooltip.group {
+		margin: 5px 0;
+		width: 150px;
+		color: #fff;
+	  font-size: 1.8em;
+	  background: rgba(0,0,0,.8);
+	}
+
+	.aside {
+		font-size: 1.6em;
+		width:100%;
+		margin: 1.625%;
+	}
+
+  @media screen and (min-width:1250px ) {
+  	.aside {
+  		width: 18%;
+  		margin-right: 2.625%;
+  		float: left;
+  	}
+  }
+
+
+  /*style for flare tree*/
+  .node {
+    cursor: pointer;
+  }
+
+  .overlay{
+      background-color:#EEE;
+  }
+   
+  .node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+   
+  .node text {
+    font-size:10px; 
+    font-family:sans-serif;
+  }
+   
+  .link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+  }
+
+  .templink {
+    fill: none;
+    stroke: red;
+    stroke-width: 3px;
+  }
+
+  .ghostCircle.show{
+      display:block;
+  }
+
+  .ghostCircle, .activeDrag .ghostCircle{
+       display: none;
+  }
+
+  </style>
+ 
+<body>
+	
+	<aside class="aside">
+		<h2>Decoding the Mahabharata - One Relation at a Time</h2>
+ 		<p>About 1.8 million words in total, the Mahabharata is roughly ten times the length of the Iliad and the Odyssey combined, or about four times the length of the Ramayana.</p>
+
+</p><p>Hover over a name to see how this character is related to others in the story.
+</p>
+ 		<p>On a side (and light) note, we found <b><a href="http://bzfd.it/1e6yoDH">this</a></b> really great article that talks about the hypothetical scenario of Facebook being there during the Mahabharata. Our visualization provides a way to see the social fabric of characters in the Mahabharata.  </p>
+ 		
+
+ 	</aside>
+ 
+
+ 
+<aside>
+	<svg height="30" width="900">
+<g>
+  <rect x="0" y="0" width="110" height="70" fill="#8F9194" ></rect>
+  <text x="10" y="20" font-family="Verdana" font-size="12" fill="white" > 1: Parent-Child </text>
+
+  <rect x="120" y="0" width="90" height="70" fill="#8F9194" ></rect>
+  <text x="130" y="20" font-family="Verdana" font-size="12" fill="white" > 2: Spouse </text>
+
+ <rect x="220" y="0" width="90" height="70" fill="#8F9194" ></rect>
+  <text x="230" y="20" font-family="Verdana" font-size="12" fill="white" > 3: Siblings </text>
+
+</g>
+<g>
+  <rect x="320" y="0" width="110" height="70" fill="#8F9194" ></rect>
+  <text x="330" y="20" font-family="Verdana" font-size="12" fill="white" > 4: Cousins </text>
+
+  <rect x="440" y="0" width="100" height="70" fill="#8F9194" ></rect>
+  <text x="450" y="20" font-family="Verdana" font-size="12" fill="white" > 5: Aunt/Uncle </text>
+
+
+
+</g>
+</svg>
+<svg height="30" width="900">
+ 
+<g>
+  <rect x="0" y="0" width="110" height="70" fill="#8F9194" ></rect>
+  <text x="10" y="20" font-family="Verdana" font-size="12" fill="white" > 6: Teacher</text>
+
+  <rect x="120" y="0" width="90" height="70" fill="#8F9194" ></rect>
+  <text x="130" y="20" font-family="Verdana" font-size="12" fill="white" > 7: Friends </text>
+
+ <rect x="220" y="0" width="110" height="70" fill="#8F9194" ></rect>
+  <text x="230" y="20" font-family="Verdana" font-size="12" fill="white" > 8: GrandParents </text>
+
+</g>
+<g>
+  <rect x="340" y="0" width="90" height="70" fill="#8F9194" ></rect>
+  <text x="350" y="20" font-family="Verdana" font-size="12" fill="white" > 9: Relatives </text>
+
+  <rect x="440" y="0" width="100" height="70" fill="#8F9194" ></rect>
+  <text x="450" y="20" font-family="Verdana" font-size="12" fill="white" > 10: Enemies </text>
+
+
+</g>
+</svg>
+
+
+</body>
+</aside>
+
+ 
+<p>Built with <a href="http://d3js.org/">d3.js</a>.</aside>
+</body>
+ 
+<script src="http://d3js.org/d3.v2.min.js?2.8.1"></script>
+<script>
+ 
+var width = 920,
+height = 600,
+outerRadius = Math.min(width, height) / 2 - 10,
+innerRadius = outerRadius - 24;
+ 
+var formatPercent = d3.format(".1%");
+ 
+var arc = d3.svg.arc()
+.innerRadius(innerRadius)
+.outerRadius(outerRadius);
+ 
+var layout = d3.layout.chord()
+.padding(.04)
+.sortSubgroups(d3.descending)
+.sortChords(d3.ascending);
+ 
+var path = d3.svg.chord()
+.radius(innerRadius);
+ 
+var svg = d3.select("body").append("svg")
+.attr("width", width)
+.attr("height", height)
+.append("g")
+.attr("id", "circle")
+.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+ 
+svg.append("circle")
+.attr("r", outerRadius);
+ 
+d3.csv("teams.csv", function(characters) {
+d3.json("matrix.json", function(matrix) {
+ 
+// Compute the chord layout.
+layout.matrix(matrix);
+ 
+// Add a group per neighborhood.
+var group = svg.selectAll(".group")
+.data(layout.groups)
+.enter().append("g")
+.attr("class", "group")
+.on("mouseover", mouseover);
+ 
+// Add a mouseover title.
+// group.append("title").text(function(d, i) {
+// return cities[i].name + ": " + formatPercent(d.value) + " of origins";
+// });
+ 
+// Add the group arc.
+var groupPath = group.append("path")
+.attr("id", function(d, i) { return "group" + i; })
+.attr("d", arc)
+.style("fill", function(d, i) { return characters[i].color; });
+ 
+// Add a text label.
+var groupText = group.append("text")
+.attr("x", 6)
+.attr("dy", 15);
+ 
+groupText.append("textPath")
+.attr("xlink:href", function(d, i) { return "#group" + i; })
+.text(function(d, i) { return characters[i].name; });
+ 
+// Remove the labels that don't fit. :(
+groupText.filter(function(d, i) { return groupPath[0][i].getTotalLength() / 2 - 16 < this.getComputedTextLength(); })
+.remove();
+ 
+// Add the chords.
+var chord = svg.selectAll(".chord")
+.data(layout.chords)
+.enter().append("path")
+.attr("class", "chord")
+.style("fill", function(d) { return characters[d.source.index].color; })
+.attr("d", path);
+ 
+// Add an elaborate mouseover title for each chord.
+ chord.append("title").text(function(d) {
+ return characters[d.source.index].name
+ + " ->  " + characters[d.target.index].name
+ + ": " + (d.source.value)
+ + "\n" + characters[d.target.index].name
+ + " -> " + characters[d.source.index].name
+ + ": " + (d.target.value);
+ });
+ 
+function mouseover(d, i) {
+chord.classed("fade", function(p) {
+return p.source.index != i
+&& p.target.index != i;
+});
+}
+});
+});
+
+
+
+ 
+</script>
+<script src="dndTree.js"></script>
+
+ 
+ 
+<footer>
+<aside>April 6th, 2013</aside>
+<p>Modified from Mike Bostock's <a href="http://bost.ocks.org/mike/uberdata/">Uber Rides by Neighborhood</a></p>
+<p>Team Members: Ruchita Rathi, Ankita Bhosale</p>
+</footer>
